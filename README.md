@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+I have focused on frontend development; please review only the frontend code.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The app automatically saves the order of cards every 5 seconds if any changes are made. It also displays a loading spinner during save operations, and clicking on a card opens a larger view of the card’s image.
 
-## Available Scripts
+Getting Started
 
-In the project directory, you can run:
+Clone the Repository
+
+### `git clone https://github.com/yourusername/drag-drop-auto-save.git`
+### `cd drag-drop-auto-save`
+
+Install Package Dependencies
+
+### `npm install`
+
+To register the service worker
+
+### `npx msw init ./public/`
+
+Run the Application
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Alternatively, you can build and run the application using Docker:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+docker build -t drag-drop-auto-save .
+docker run -p 3000:3000 drag-drop-auto-save
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Architectural / API Design Approach
+This app is built as a React single-page application:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Components: Each card is a separate component with drag-and-drop functionality. The main app container manages the card order and auto-save.
+Auto-Save: The app saves the card order every 5 seconds if there are any changes. It interacts with two mock API endpoints: one to load the card list and another to save updates.
+Mock API with MSW: During development, MSW (Mock Service Worker) is used to simulate backend responses, so we can test frontend functionality without needing an actual server.
+Efficiency and User Experience: Only saves data when changes happen, reducing unnecessary requests. A “Saving…” spinner and last-saved time keep users informed. MSW enables easy testing of API interactions, making the app easy to develop and deploy.
