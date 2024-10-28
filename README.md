@@ -28,6 +28,8 @@ To run the Application
 
 ## **Architectural / API Design Approach**
 
+**Random Cat Images**: Each time the app reloads, it displays different cat images to make it easy to see the loading spinner in action.
+
 **Components**: Each card is a separate component with drag-and-drop functionality. The main app container manages the card order and auto-save.
 
 **Auto-Save**: The app saves the card order every 5 seconds if there are any changes. It interacts with two mock API endpoints: one to load the card list and another to save updates.
